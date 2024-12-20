@@ -1,3 +1,3 @@
-from problems import day_2
+from problems import day3
 
-print(day_2())
+print(day3())

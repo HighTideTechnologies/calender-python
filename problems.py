@@ -1,4 +1,5 @@
 import requests
+from conts import Consts
 from Environment import Environment
 
 
@@ -62,6 +63,48 @@ def day_2():
 
         result.append(PasswordPolicy(check[0], check[1], check[2]))
     print(result)
+
         
 
-    
+
+def day3():
+    grid = get_calendar_data(env, day=3)
+#     Right 1, down 1.
+# Right 3, down 1. (This is the slope you already checked.)
+# Right 5, down 1.
+# Right 7, down 1.
+# Right 1, down 2.
+
+
+    # grid = [
+    #     "..##.......",
+    #     "#...#...#..",
+    #     ".#....#..#.",
+    #     "..#.#...#.#",
+    #     ".#...##..#.",
+    #     "..#.##.....",
+    #     ".#.#.#....#",
+    #     ".#........#",
+    #     "#.##...#...",
+    #     "#...##....#",
+    #     ".#..#...#.#",
+    # ]  # Replace with get_calendar_data if available
+
+    total = check_trees(grid, 1,1) * check_trees(grid, 3,1) * check_trees(grid, 5,1) * check_trees(grid, 7,1) * check_trees(grid, 1,2)
+
+    return total
+
+def check_trees(grid, right, down):
+    consts = Consts(grid)
+    x, y = 0,0
+    tree_count = 0
+
+    while y < consts.height:
+        if grid[y][x % consts.width] ==  consts.TREE_SYMBOL:
+            tree_count += 1
+        
+        y += down
+        x += right
+
+    return tree_count
+
