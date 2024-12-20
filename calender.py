@@ -5,7 +5,7 @@ from Environment import Environment
 def get_calender_data(env:Environment, year=2020, day=1):
     data = requests.get(f"https://adventofcode.com/{year}/day/{day}/input", cookies={'session': env.SESSIONID}, headers={'User-Agent': env.USER_AGENT})
 
-    return data.text.split()
+    return data.text.splitlines()
 env = Environment()
 calendar_data = get_calender_data(env)
 def two_sum(calender_data:list[str]=[1721,979,366,299,675,1456], target_sum=2020):
@@ -42,6 +42,26 @@ def three_sum(calender_data, target_sum=2020):
 
 
 
-print(two_sum(calendar_data))
-print(three_sum(calendar_data))
+#print(two_sum(calendar_data))
+#print(three_sum(calendar_data))
+class PasswordPolicy:
+    def __init__(self, pair:str, symbol, text):
+        result = pair.split("-") 
+        self.min, self.max = int(result[0]), int(result[1])
+        self.symbol = symbol[0]
+        self.text = text
+    def __str__(self):
+        return f"{self.min} {self.max} {self.symbol} {self.text} "
+    def __repr__(self):
+        return f"{self.min} {self.max} {self.symbol} {self.text} "
+def day_2():
+    result = []
+    calendar_data = get_calender_data(env, day=2)
+    for data in calendar_data:
+        check = data.split()
+
+        result.append(PasswordPolicy(check[0], check[1], check[2]))
+    print(result)
+        
+day_2()
     
