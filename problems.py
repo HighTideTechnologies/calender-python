@@ -2,12 +2,12 @@ import requests
 from Environment import Environment
 
 
-def get_calender_data(env:Environment, year=2020, day=1):
+def get_calendar_data(env:Environment, year=2020, day=1):
     data = requests.get(f"https://adventofcode.com/{year}/day/{day}/input", cookies={'session': env.SESSIONID}, headers={'User-Agent': env.USER_AGENT})
 
     return data.text.splitlines()
 env = Environment()
-calendar_data = get_calender_data(env)
+calendar_data = get_calendar_data(env)
 def two_sum(calender_data:list[str]=[1721,979,366,299,675,1456], target_sum=2020):
     # https://www.geeksforgeeks.org/check-if-pair-with-given-sum-exists-in-array/
     dict_values = {}
@@ -56,12 +56,12 @@ class PasswordPolicy:
         return f"{self.min} {self.max} {self.symbol} {self.text} "
 def day_2():
     result = []
-    calendar_data = get_calender_data(env, day=2)
+    calendar_data = get_calendar_data(env, day=2)
     for data in calendar_data:
         check = data.split()
 
         result.append(PasswordPolicy(check[0], check[1], check[2]))
     print(result)
         
-day_2()
+
     
